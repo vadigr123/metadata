@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadata by:: mikus</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+        <div class="server-list">
+            <div class="server active" title="Metadata Image">
+                <img src="img/server.png" alt="Metadata" class="server-icon">
+            </div>
+            <div class="server-divider"></div>
+            <a href="https://discord.gg/UtYvGwFfvx" target="_blank" class="server" title="Discord">
+                <img src="img/discord.png" alt="CivitAI" class="server-icon">
+            </a>
+            <a href="https://civitai.com/user/vadigr123_" target="_blank" class="server" title="CivitAI">
+                <img src="img/civitai.png" alt="CivitAI" class="server-icon">
+            </a>
+            <a href="https://t.me/ai_mikus" target="_blank" class="server" title="Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+        </div>
+        
+		
+		<div class="channel-list">
+    <div class="channel-header">
+        <h2>METADATA EDITOR</h2>
+    </div>
+    
+    <!-- Image Category -->
+    <div class="category">IMAGE</div>
+    <div class="channel active" data-tab="view">#viewing</div>
+    <div class="channel" data-tab="edit">#editing</div>
+    
+    <!-- File Category -->
+    <div class="category">FILE</div>
+    <div class="channel" data-tab="lora">#lora-metadata</div>
+	
+		</div>
+        
+        <div class="main-content">
+            <div class="tab-content active" id="view-tab">
+                <div class="message-list">
+                    <div class="message">
+                        <div class="avatar">M</div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="username">Metadata Viewer</span>
+                                <span class="timestamp">Today at 12:00</span>
+                            </div>
+                            <div class="message-text">Drop an image to view its metadata</div>
+                        </div>
+                    </div>
+                    
+                    <div id="drop-area">
+                        <div class="drop-content">
+                            <svg class="upload-icon" viewBox="0 0 24 24">
+                                <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                            </svg>
+                            <p>Drag & drop image here</p>
+                            <p class="small-text">Supports PNG, JPG, JPEG</p>
+                        </div>
+                    </div>
+                    
+                    <div id="notification"></div>
+                    
+                    <div id="results" class="hidden">
+                        <div class="image-preview">
+                            <img id="preview" alt="Image Preview">
+                        </div>
+                        
+                        <div class="metadata-section">
+                            <h3 class="section-title">PROMPT</h3>
+                            <div class="metadata-box">
+                                <pre id="prompt"></pre>
+                                <button class="copy-btn discord-btn">Copy</button>
+                            </div>
+                        </div>
+                        
+                        <div class="metadata-section">
+                            <h3 class="section-title">NEGATIVE PROMPT</h3>
+                            <div class="metadata-box">
+                                <pre id="negative-prompt"></pre>
+                                <button class="copy-btn discord-btn">Copy</button>
+                            </div>
+                        </div>
+                        
+                        <div class="metadata-section">
+                            <h3 class="section-title">PARAMETERS</h3>
+                            <div class="metadata-box">
+                                <div id="parameters-table"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content hidden" id="edit-tab">
+                <div class="message-list">
+                    <div class="message">
+                        <div class="avatar">E</div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="username">Metadata Editor</span>
+                                <span class="timestamp">Today at 12:00</span>
+                            </div>
+                            <div class="message-text">Edit your image metadata below</div>
+                        </div>
+                    </div>
+
+                    <div id="edit-drop-area">
+                        <div class="drop-content">
+                            <svg class="upload-icon" viewBox="0 0 24 24">
+                                <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                            </svg>
+                            <p>Drag & drop image to edit</p>
+                            <p class="small-text">Supports PNG, JPG, JPEG</p>
+                        </div>
+                    </div>
+
+                    <div id="edit-notification"></div>
+
+                    <div class="image-preview">
+                        <img id="edit-preview" alt="Edit Preview">
+                    </div>
+
+                    <div class="metadata-section">
+                        <h3 class="section-title">EDIT PROMPT</h3>
+                        <div class="metadata-box">
+                            <textarea id="edit-prompt" class="metadata-input"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="metadata-section">
+                        <h3 class="section-title">EDIT NEGATIVE PROMPT</h3>
+                        <div class="metadata-box">
+                            <textarea id="edit-negative-prompt" class="metadata-input"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="metadata-section">
+                        <h3 class="section-title">EDIT PARAMETERS</h3>
+                        <div class="metadata-box">
+                            <div id="edit-parameters"></div>
+                        </div>
+                    </div>
+
+                    <div class="metadata-section">
+                        <button id="save-changes" class="discord-btn save-btn">
+                            <i class="fas fa-save"></i> Save & Download Image
+                        </button>
+                    </div>
+                </div>
+            </div>
+			
+			
+			<div class="tab-content hidden" id="lora-tab">
+    <div class="message-list">
+        <div class="message">
+            <div class="avatar">L</div>
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="username">LoRA Metadata</span>
+                    <span class="timestamp">Today at 12:00</span>
+                </div>
+                <div class="message-text">Drop a safetensors file to view its metadata</div>
+            </div>
+        </div>
+        
+        <div id="lora-drop-area" class="discord-drop-area">
+            <div class="drop-content">
+                <svg class="upload-icon" viewBox="0 0 24 24">
+                    <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                </svg>
+                <p>Drag & drop safetensors file here</p>
+                <p class="small-text">Supports .safetensors files</p>
+            </div>
+        </div>
+        
+        <div id="lora-notification" class="discord-notification"></div>
+        
+
+		<div id="lora-results" class="hidden">
+			<div class="metadata-grid">
+        <!-- Model Section -->
+				<div class="metadata-section">
+					<h3 class="section-title">MODEL</h3>
+				<div class="metadata-box">
+					<div class="param-row">
+						<div class="param-name">Name:</div>
+							<div class="param-value" id="model-name"></div>
+					</div>
+                <div class="param-row">
+                    <div class="param-name">Base Model:</div>
+                    <div class="param-value" id="base-model"></div>
+                </div>
+                <div class="param-row">
+                    <div class="param-name">VAE:</div>
+                    <div class="param-value" id="model-vae"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- General Section -->
+        <div class="metadata-section">
+            <h3 class="section-title">GENERAL</h3>
+            <div class="metadata-box">
+                <div class="param-row">
+                    <div class="param-name">Batch:</div>
+                    <div class="param-value" id="batch-size"></div>
+                </div>
+                <div class="param-row">
+                    <div class="param-name">Resolution:</div>
+                    <div class="param-value" id="resolution"></div>
+                </div>
+                <div class="param-row">
+                    <div class="param-name">Clip Skip:</div>
+                    <div class="param-value" id="clip-skip"></div>
+                </div>
+                <div class="param-row">
+                    <div class="param-name">Epoch:</div>
+                    <div class="param-value" id="epoch"></div>
+                </div>
+                <div class="param-row">
+                    <div class="param-name">Steps:</div>
+                    <div class="param-value" id="steps"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optimizer Section -->
+        <div class="metadata-section">
+            <h3 class="section-title">OPTIMIZER</h3>
+            <div class="metadata-box">
+                <div class="param-row">
+                    <div class="param-name">Type:</div>
+                    <div class="param-value" id="optimizer-type"></div>
+                </div>
+                <div class="param-row">
+                    <div class="param-name">Scheduler:</div>
+                    <div class="param-value" id="scheduler"></div>
+                </div>
+                <div class="param-row">
+                    <div class="param-name">Learning Rates:</div>
+                    <div class="param-value" id="learning-rates"></div>
+                </div>
+                <div class="param-row">
+                    <div class="param-name">Optional Args:</div>
+                    <div class="param-value" id="optional-args"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Info Section -->
+        <div class="metadata-section">
+            <h3 class="section-title">TRAINING INFO</h3>
+            <div class="metadata-box">
+                <div class="param-row">
+                    <div class="param-name">Train Date:</div>
+                    <div class="param-value" id="train-date"></div>
+                </div>
+                <div class="param-row">
+                    <div class="param-name">Train Time:</div>
+                    <div class="param-value" id="train-time"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dataset Section -->
+        <div class="metadata-section">
+            <h3 class="section-title">DATASET</h3>
+            <div class="metadata-box">
+                <pre id="dataset-info"></pre>
+            </div>
+        </div>
+
+        <!-- Suggested Prompt Section -->
+        <div class="metadata-section">
+            <h3 class="section-title">SUGGESTED PROMPT</h3>
+            <div class="metadata-box">
+                <pre id="suggested-prompt"></pre>
+            </div>
+        </div>
+
+        <!-- Tag Frequency Section -->
+        <div class="metadata-section">
+            <h3 class="section-title">TAG FREQUENCY</h3>
+            <div class="metadata-box">
+                <pre id="tag-frequency"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+            
+            <!-- Add other sections similarly -->
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/piexifjs@1.0.6/piexif.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

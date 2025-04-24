@@ -26,7 +26,7 @@ A "application" for viewing ~~and editing~~ metadata in images and LoRA model fi
 ## File Structure
 
 ```
-metadata-editor/
+metadata/
 ├── img/                    # Image assets
 │   ├── civitai.png         # CivitAI icon
 │   ├── discord.png         # Discord icon
